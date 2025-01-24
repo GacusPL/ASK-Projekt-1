@@ -1,17 +1,16 @@
 import java.util.Scanner;
 
 public class AskProjekt1 {
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("\nPodaj liczbę int ");
+        System.out.print("\nPodaj liczbę int: ");
         int Int = sc.nextInt();
-        System.out.print("\nPodaj liczbę float ");
+        System.out.print("\nPodaj liczbę float: ");
         float Float = sc.nextFloat();
-        System.out.print("\nPodaj liczbę double ");
+        System.out.print("\nPodaj liczbę double: ");
         double Double = sc.nextDouble();
 
-        System.out.println("\n1. Postać bajtowa:");
+        System.out.println("\n1. Postać bajtowa (Big-endian):");
         printByteArray(Int);
         printByteArray(Float);
         printByteArray(Double);
@@ -22,46 +21,50 @@ public class AskProjekt1 {
         System.out.println("DOUBLE: "+toBinary(Double));
 
         System.out.println("\n3. Odejmowanie w U2:");
-        System.out.println("\nPodaj pierwszą liczbę do odejmowania: ");
+        System.out.println("Podaj pierwszą liczbę do odejmowania: ");
         int a = sc.nextInt();
         System.out.println("\nPodaj drugą liczbę do odejmowania: ");
         int b = sc.nextInt();
         subtractU2(a, b);
-        sc.close();
 
         System.out.println("\n4. Konwersja DEC <-> FLOAT:");
+        System.out.print("Podaj liczbę int do konwersji na float: ");
+        int int2 = sc.nextInt();
+        System.out.println("FLOAT: " + DecToFloat(int2));
+
+        System.out.print("\nPodaj liczbę float do konwersji na int: ");
+        float float2 = sc.nextFloat();
+        System.out.println("INT: " + FloatToDec(float2));
+        sc.close();
     }
 
     private static void printByteArray(int value) {
         byte[] bytes = new byte[4];
         for (int i = 0; i < 4; i++) {
-            bytes[i] = (byte) (value >>> (i * 8));
+            bytes[3-i] = (byte) (value >>> (i * 8));
         }
         System.out.print("INT: ");
         printHexArray(bytes);
-        System.out.println();
     }
 
     private static void printByteArray(float value) {
         int intBits = Float.floatToIntBits(value);
         byte[] bytes = new byte[4];
         for (int i = 0; i < 4; i++) {
-            bytes[i] = (byte) (intBits >>> (i * 8));
+            bytes[3-i] = (byte) (intBits >>> (i * 8));
         }
         System.out.print("FLOAT: ");
         printHexArray(bytes);
-        System.out.println();
     }
 
     private static void printByteArray(double value) {
         long longBits = Double.doubleToLongBits(value);
         byte[] bytes = new byte[8];
         for (int i = 0; i < 8; i++) {
-            bytes[i] = (byte) (longBits >>> (i * 8));
+            bytes[7-i] = (byte) (longBits >>> (i * 8));
         }
         System.out.print("DOUBLE: ");
         printHexArray(bytes);
-        System.out.println();
     }
 
     private static void printHexArray(byte[] bytes) {
@@ -107,8 +110,16 @@ public class AskProjekt1 {
     }
 
     private static void subtractU2(int a, int b) {
-        int result = a -b;
+        int result = a - b;
         System.out.println("\nwynik odejmowania: "+a + " - " + b + " (U2) = " + result);
         System.out.println("\nWynik odejmowania (U2) binarnie = " + toBinary(result));
+    }
+
+    private static float DecToFloat(int value) {
+        return (float) value;
+    }
+
+    private static int FloatToDec(float value) {
+        return (int) value;
     }
 }
