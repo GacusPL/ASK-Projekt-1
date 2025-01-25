@@ -103,7 +103,7 @@ Liczby konwertowane są na ciąg binarny przy użyciu metody `Integer.toBinarySt
 W przypadku liczb float i double wymagana jest dodatkowa konwersja na format zmiennoprzecinkowy **IEEE 754**.
 Wykorzystywane do tego są te metody `Float.floatToIntBits()` i `Double.doubleToLongBits()`. Przeciążona funkcja `toBinary()` obsługuje te przypadki.
 
-## Dodanie odstepów
+## Dodawanie odstepów
 Zwracany ciąg znaków przez funkcję `toBinary()` jest formatowany za pośrednictwem funkcji `addSpaces()`:
 
 ```java
