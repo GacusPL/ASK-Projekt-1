@@ -1,5 +1,11 @@
 # ASK-Projekt-1
 ASK zadanie semestralne 1 
+#Wstęp
+Program napisany w języku Java spełniający następujące założenia:
+  1.	Drukuje postać bajtową danych INT, FLOAT, DOUBLE
+  2.	Drukuje postać binarną dla liczb jak w p 1
+  3.	Prezentuje zasadę wykonywania odejmowania w U2
+  4.	Prezentuje konwersję FLOAT -> DEC i DEC -> FLOAT
 
 # Opis działania programu
 
@@ -53,3 +59,21 @@ Program prosi o podanie liczby całkowitej (`int`) i za pośrednictwem metody `D
 
 Następnie następuje działanie odwrotne:
 Program prosi o podanie liczby zmiennoprzecinkowej i konwertuje ją na całkowitą za pomocą metody `FloatToDec()`.
+
+#Opis wybranych funkcji programu
+
+## Drukowanie tablicy bajtów
+```java
+    private static void printByteArray(int value) {
+        byte[] bytes = new byte[4]; //tworzenie tablicy 4 bajtów
+        for (int i = 0; i < 4; i++) { //iteracja przez wszystkie bajty tablicy od najmniej znaczącego
+            bytes[3-i] = (byte) (value >>> (i * 8)); //wyodrębnienie bajtów poprzez
+            //przesunięcie bitowe i zapis do tablicy w kolejności big-endian
+        }
+        System.out.print("INT: ");
+        printHexArray(bytes);// Wyświetlanie tablicy w formacie HEX
+```
+
+#Przykładowy wynik programu
+
+[](/results.png)
