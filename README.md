@@ -142,3 +142,12 @@ private static String addSpaces(String binary) {
 # Przykładowy wynik programu
 
 ![](/results.png)
+
+## Autor
+
+Kacper Szponar
+21306
+
+## Licencja
+
+Licencja MIT.
