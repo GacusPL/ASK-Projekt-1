@@ -1,6 +1,6 @@
 # ASK-Projekt-1
 ASK zadanie semestralne 1 
-#Wstęp
+# Wstęp
 Program napisany w języku Java spełniający następujące założenia:
   1.	Drukuje postać bajtową danych INT, FLOAT, DOUBLE
   2.	Drukuje postać binarną dla liczb jak w p 1
@@ -90,6 +90,55 @@ Funkcja pomocnicza drukująca tablicę bajtów w formacie `HEX`
         System.out.println("]");
     }
 ```
+## Zamiana liczby na binarną
+Liczby konwertowane są na ciąg binarny przy użyciu metody `Integer.toBinaryString()`. Następnie ciąg jest dopełniany zerami za pomocą `String.format("%32s", binary).replace(' ', '0').`
+```java
+    public static String toBinary(int number) {
+        String binary = Integer.toBinaryString(number);
+        binary = String.format("%32s", binary).replace(' ', '0');
+        return addSpaces(binary);
+    }
+```
+
+W przypadku liczb float i double wymagana jest dodatkowa konwersja na format zmiennoprzecinkowy **IEEE 754**.
+Wykorzystywane do tego są te metody `Float.floatToIntBits()` i `Double.doubleToLongBits()`. Przeciążona funkcja `toBinary()` obsługuje te przypadki.
+
+## Dodanie odstepów
+Zwracany ciąg znaków przez funkcję `toBinary()` jest formatowany za pośrednictwem funkcji `addSpaces()`:
+
+```java
+private static String addSpaces(String binary) {
+        StringBuilder sb = new StringBuilder();//tworzymy obiekt StringBuilder
+        //pozwalający na modyfikowanie łańcuchów znaków
+        for (int i = 0; i < binary.length(); i++) {//iterujemy po każdym znaku w ciągu binarnym
+            sb.append(binary.charAt(i));//dodanie znaku do StringBuildera
+            if ((i + 1) % 8 == 0 && i < binary.length() - 1) {//gdy indeks jest wielokrotnością 8
+                //i nie jest ostatnim znakiem warunek zostaje spełniony
+                sb.append(' ');//gdy warunek jest spełniony dodajemy spację
+            }
+        }
+        return sb.toString();//konwersja na String i zwracanie wyniku
+    }
+```
+## Funkcja odejmowania w U2
+```java
+    private static void subtractU2(int a, int b) {
+        int result = a - b;
+        System.out.println("\nwynik odejmowania: "+a + " - " + b + " = " + result);
+        System.out.println("\nWynik odejmowania (U2) binarnie = " + toBinary(result));
+    }
+```
+## Konwersja Float <-> DEC
+```java
+    private static float DecToFloat(int value) {
+        return (float) value;//rzutowanie zmiennej na float
+    }
+
+    private static int FloatToDec(float value) {
+        return (int) value;//rzutowanie zmiennej na int
+    }
+```
+
 # Przykładowy wynik programu
 
 ![](/results.png)
