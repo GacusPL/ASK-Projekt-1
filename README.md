@@ -60,7 +60,7 @@ Program prosi o podanie liczby całkowitej (`int`) i za pośrednictwem metody `D
 Następnie następuje działanie odwrotne:
 Program prosi o podanie liczby zmiennoprzecinkowej i konwertuje ją na całkowitą za pomocą metody `FloatToDec()`.
 
-#Opis wybranych funkcji programu
+# Opis wybranych funkcji programu
 
 ## Drukowanie tablicy bajtów
 ```java
@@ -74,6 +74,22 @@ Program prosi o podanie liczby zmiennoprzecinkowej i konwertuje ją na całkowit
         printHexArray(bytes);// Wyświetlanie tablicy w formacie HEX
 ```
 
-#Przykładowy wynik programu
+## Drukowanie tablicy 
+Funkcja pomocnicza drukująca tablicę bajtów w formacie `HEX`
 
-[](/results.png)
+```java
+ private static void printHexArray(byte[] bytes) {
+        System.out.print("[");
+        for (int i = 0; i < bytes.length; i++) {//iteracja przez wszystkie bajty tablicy
+            System.out.printf("0x%02X", bytes[i]);//wypisanie każdego bajtu
+            //w formacie szesnastkowym z wiodącymi zerami
+            if (i < bytes.length - 1) {
+                System.out.print(", ");//dodanie przecinka pomiędzy bajtami
+            }
+        }
+        System.out.println("]");
+    }
+```
+# Przykładowy wynik programu
+
+![](/results.png)
